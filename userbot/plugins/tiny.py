@@ -6,10 +6,10 @@ from PIL import Image, ImageDraw
 from . import *
 import os
 try:
-    from pyquery import cv2
+    import cv2
 except ModuleNotFoundError:
     os.system("pip3 install opencv-python")
-    from pyquery import cv2
+    import cv2
 plugin_category = "extra"
 
 @catub.cat_cmd(
