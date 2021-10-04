@@ -34,7 +34,7 @@ plugin_category = "extra"
 async def _(event):
     "To make logo of given text."
     cmd = event.pattern_match.group(1).lower()
-    chat = "@BHLogoBot"
+    chat = "@Sheeba_Queenbot"
     tr = os.environ.get("COMMAND_HAND_LER")
     if cmd == "d" :
         input_str = "".join(event.text.split(maxsplit=1)[1:])
@@ -50,7 +50,7 @@ async def _(event):
                         await event.client(ImportChatInviteRequest('RvT1YQvgl_8D9Hbd'))
                     except UserAlreadyParticipantError:
                         await asyncio.sleep(0.00000069420)
-                    await conv.send_message(f"/gen {input_str}")
+                    await conv.send_message(f"/logo {input_str}")
                     await event.delete()
                     Venom = await conv.get_response(1)
                     cat = await event.client.send_message(event.chat_id, Venom)
@@ -60,7 +60,7 @@ async def _(event):
                     Parker = Mine + Zarox
                     file = await event.client.download_media(Peter, Parker)
                 except YouBlockedUserError:
-                    return await edit_or_reply(event,f"`{tr}unblock @BHLogoBot` and then try",)
+                    return await edit_or_reply(event,f"`{tr}unblock @Sheeba_Queenbot` and then try",)
                 await event.client.send_file(event.chat_id,  file, force_document=True, caption=f"➥ Genrated by :- {mention}")
                 await event.client.delete_messages(event.chat_id, cat)
 
@@ -78,7 +78,7 @@ async def _(event):
                         await event.client(ImportChatInviteRequest('RvT1YQvgl_8D9Hbd'))
                     except UserAlreadyParticipantError:
                         await asyncio.sleep(0.00000069420)
-                    await conv.send_message(f"/gen {input_str}")
+                    await conv.send_message(f"/logo {input_str}")
                     await event.delete()
                     Venom = await conv.get_response(1)
                     cat = await event.client.send_message(event.chat_id, Venom)
@@ -88,7 +88,7 @@ async def _(event):
                     Parker = Mine + Zarox
                     file = await event.client.download_media(Peter, Parker)
                 except YouBlockedUserError:
-                    await edit_or_reply(event,f"`{tr}unblock @BHLogoBot` and then try",)
+                    await edit_or_reply(event,f"`{tr}unblock @Sheeba_Queenbot` and then try",)
                 await event.client.send_file(event.chat_id,  file, force_document=False, caption=f"➥ Genrated by :- {mention}")
                 await event.client.delete_messages(event.chat_id, cat)
                 if os.path.exists(file):    os.remove(file)
