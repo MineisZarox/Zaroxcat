@@ -53,7 +53,7 @@ async def _(event):
                     await conv.send_message(f"/logo {input_str}")
                     await event.delete()
                     Venom = await conv.get_response(1)
-                    cat = await event.client.send_message(event.chat_id, Venom)
+                    cat = await edit_or_reply(event.chat_id, Venom)
                     Peter = await conv.get_response(1)
                     Mine = input_str
                     Zarox = str(Peter.file.ext)
@@ -81,7 +81,7 @@ async def _(event):
                     await conv.send_message(f"/logo {input_str}")
                     await event.delete()
                     Venom = await conv.get_response(1)
-                    cat = await event.client.send_message(event.chat_id, Venom)
+                    cat = await edit_or_reply(event.chat_id, Venom)
                     Peter = await conv.get_response(1)
                     Mine = input_str
                     Zarox = str(Peter.file.ext)
