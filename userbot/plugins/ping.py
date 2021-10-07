@@ -30,7 +30,7 @@ async def _(event):
         end = datetime.now()
         tms = (end - start).microseconds / 1000
         ms = round((tms - 0.6) / 3, 3)
-        await catevent.edit(f"Average Pong!\n`{ms} ms`")
+        await catevent.edit(f"Pong!\n`{ms} ms`")
     else:
         start = datetime.now()
         catevent = await edit_or_reply(event, "Pong!")
