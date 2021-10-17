@@ -12,7 +12,7 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 
 
 @catub.cat_cmd(
-    pattern="install$",
+    pattern="(install|i)$",
     command=("install", plugin_category),
     info={
         "header": "To install an external plugin.",
@@ -125,7 +125,7 @@ async def unload(event):
 
 
 @catub.cat_cmd(
-    pattern="uninstall ([\s\S]*)",
+    pattern="(uninstall|ui) ([\s\S]*)",
     command=("uninstall", plugin_category),
     info={
         "header": "To uninstall a plugin temporarily.",
@@ -137,7 +137,7 @@ async def unload(event):
 )
 async def unload(event):
     "To uninstall a plugin."
-    shortname = event.pattern_match.group(1)
+    shortname = event.pattern_match.group(2)
     path = Path(f"userbot/plugins/{shortname}.py")
     if not os.path.exists(path):
         return await edit_delete(
