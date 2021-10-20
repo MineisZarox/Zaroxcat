@@ -122,5 +122,5 @@ async def aexec(code, smessatatus):
     )
 
     return await locals()["__aexec"](
-        message, event, reply, message.client, p, message.chat_id
+        message, event, reply, message.client, p, message.chat_id, zarox
     )
