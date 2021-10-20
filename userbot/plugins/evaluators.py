@@ -110,10 +110,11 @@ async def _(event):
 
 
 async def aexec(code, smessatatus):
-    zarox = event
-    message = event = smessatatus = zarox
+
+    message = event = smessatatus
     p = lambda _x: print(_format.yaml_format(_x))
     reply = await event.get_reply_message()
+    zarox = event
     
     exec(
         (
