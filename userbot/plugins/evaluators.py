@@ -60,6 +60,7 @@ async def _(event):
     },
 )
 async def _(event):
+    zarox = event
     "To Execute python script/statements in a subprocess."
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
