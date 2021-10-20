@@ -110,12 +110,13 @@ async def _(event):
 
 
 async def aexec(code, smessatatus):
-    message = event = smessatatus
+    message = event = smessatatus = zarox
     p = lambda _x: print(_format.yaml_format(_x))
     reply = await event.get_reply_message()
+    
     exec(
         (
-            "async def __aexec(message, event , zarox , reply, client, p, chat): "
+            "async def __aexec(message, event , reply, client, p, chat, zarox): "
             + "".join(f"\n {l}" for l in code.split("\n"))
         )
     )
