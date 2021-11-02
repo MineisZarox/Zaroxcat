@@ -32,8 +32,8 @@ async def catgban(event):  # sourcery no-metrics
     await cate.edit(
         f"`initiating gban of the `[user](tg://user?id={user.id}) `in {san} groups`"
     )
-    await asyncio.sleep(2)
-    cattaken = random.choice(range(8, 17))
+    cattaken = random.choice(range(25, 50))
+    await asyncio.sleep(cattaken)
     await cate.edit(
             f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {san} groups in {cattaken} seconds`!!"
         )
