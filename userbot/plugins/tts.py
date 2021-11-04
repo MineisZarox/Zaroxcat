@@ -24,7 +24,6 @@ plugin_category = "utils"
         "header": "Text to speech command.",
         "usage": [
             "{tr}tts <text>",
-            "{tr}tts <reply>",
             "{tr}tts <language code> ; <text>",
         ],
     },
@@ -36,10 +35,6 @@ async def _(event):
     reply_to_id = await reply_id(event)
     if ";" in input_str:
         lan, text = input_str.split(";")
-    elif event.reply_to_msg_id:
-        previous_message = await event.get_reply_message()
-        text = previous_message.message
-        lan = input_str or "en"
     else:
         if not input_str:
             return await edit_or_reply(event, "Invalid Syntax. Module stopping.")
