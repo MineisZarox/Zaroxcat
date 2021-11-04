@@ -84,9 +84,6 @@ async def _(event):
             voice_note=True,
         )
         os.remove(required_file_name)
-        await edit_delete(
-            catevent,
-            "`Processed text {} into voice in {} seconds!`".format(text[0:20], ms),
         )
     except Exception as e:
         await edit_or_reply(catevent, f"**Error:**\n`{e}`")
