@@ -85,5 +85,6 @@ async def _(event):
         )
         os.remove(required_file_name)
         )
+        await catevent.delete
     except Exception as e:
         await edit_or_reply(catevent, f"**Error:**\n`{e}`")
