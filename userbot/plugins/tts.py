@@ -30,6 +30,7 @@ plugin_category = "utils"
 )
 async def _(event):
     "text to speech command"
+    await event.delete()
     input_str = event.pattern_match.group(1)
     start = datetime.now()
     reply_to_id = await reply_id(event)
@@ -40,7 +41,6 @@ async def _(event):
             return await edit_or_reply(event, "Invalid Syntax. Module stopping.")
         text = input_str
         lan = "en"
-    catevent = await edit_or_reply(event, "`Recording......`")
     text = deEmojify(text.strip())
     lan = lan.strip()
     if not os.path.isdir("./temp/"):
@@ -84,6 +84,5 @@ async def _(event):
             voice_note=True,
         )
         os.remove(required_file_name)
-        await catevent.delete()
     except Exception as e:
         await edit_or_reply(catevent, f"**Error:**\n`{e}`")
