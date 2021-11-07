@@ -46,6 +46,7 @@ PyMuPDF
 pySmartDL
 python-barcode
 python-dotenv
+pytgcalls==3.0.0.dev19
 pytz
 qrcode
 randomstuff.py
