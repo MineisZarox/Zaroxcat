@@ -35,6 +35,6 @@ async def _(event):
     text = event.pattern_match.group(1)
     result = await isong(event, text)
     if result == "":
-        await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
-    else:
         return await event.edit("`Song not found`")
+    else:
+        await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
