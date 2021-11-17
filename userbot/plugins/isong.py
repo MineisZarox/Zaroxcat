@@ -12,7 +12,6 @@ async def isong(event, text):
     if not text:
         await edit_delete(event, "`Give me a song name`")
     else:
-        await event.delete()
         run = await event.client.inline_query(bot, text)
         result = await run[0].click("me")
         return result
@@ -27,11 +26,12 @@ async def isong(event, text):
         ],
     },
 )
-async def isong(event):
+async def _(event):
     text = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
     result = await isong(event, text)
     try:
+        await event.delete()
         await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
     except IndexError as error:
         await event.edit("song not find")
