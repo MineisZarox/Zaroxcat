@@ -16,9 +16,9 @@ async def isong(event, text):
             run = await event.client.inline_query(bot, text)
             result = await run[0].click("me")
             await event.delete()
-            
         except IndexError as error:
-            await event.edit("`song not find`")
+            result = ""
+    return result
 
 @catub.cat_cmd(
     pattern="isong ?(.*)",
@@ -34,4 +34,7 @@ async def _(event):
     reply_to_id = await reply_id(event)
     text = event.pattern_match.group(1)
     result = await isong(event, text)
-    await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
+    if result == "":
+        await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
+    else:
+        return await event.edit("`Song not found`")
