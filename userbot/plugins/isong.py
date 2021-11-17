@@ -38,3 +38,4 @@ async def _(event):
     else:
         await event.delete()
         await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
+        await result.delete()
