@@ -6,7 +6,6 @@ from ..helpers.utils import reply_id
 plugin_category = "useless"
 
 async def isong(event, text):
-    reply_to_id = await reply_id(event)
     if event.fwd_from:
         return
     bot = "DeezerMusicBot"
@@ -17,9 +16,9 @@ async def isong(event, text):
             run = await event.client.inline_query(bot, text)
             result = await run[0].click("me")
             await event.delete()
-            await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
+            
         except IndexError as error:
-            await event.edit("song not find")
+            await event.edit("`song not find`")
 
 @catub.cat_cmd(
     pattern="isong ?(.*)",
@@ -32,5 +31,7 @@ async def isong(event, text):
     },
 )
 async def _(event):
+    reply_to_id = await reply_id(event)
     text = event.pattern_match.group(1)
     result = await isong(event, text)
+    await event.client.send_message(event.chat_id, result, reply_to=reply_to_id)
