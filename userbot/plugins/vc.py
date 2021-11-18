@@ -49,7 +49,7 @@ async def _(event):
 async def _(event):
     "End voicechat"
     try:
-        await bot(DiscardGroupCallRequest(await getvc(event)))
+        await event.client(DiscardGroupCallRequest(await getvc(event)))
         await event.edit("`Voice Chat Ended Successfully`")
     except Exception as e:
         await event.edit( f"`{str(e)}`")
