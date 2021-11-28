@@ -1,4 +1,4 @@
-#Created by @MineisZarox t.me/MineisZarox
+#Created by @MineisZarox t.me/IrisZarox
 
 import os
 import re
