@@ -59,6 +59,7 @@ async def _(zarox):
             try:
                 msg_start = await conv.send_message("/start")
                 response = await conv.get_response()
+                await zarox.client.send_read_acknowledge(conv.chat_id)
             except TimeoutError:
                 return await edit_or_reply(zarox, "`Coundnt able to download the video. Try again later`")
             start = datetime.now()
