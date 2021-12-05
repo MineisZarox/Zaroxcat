@@ -34,7 +34,7 @@ async def install(event):
                 load_module(shortname.replace(".py", ""))
                 await edit_delete(
                     event,
-                    f"Installed Plugin `{os.path.basename(downloaded_file_name)}`",
+                    f"Iɴsᴛᴀʟʟᴇᴅ Pʟᴜɢɪɴ `{os.path.basename(downloaded_file_name)}`",
                     10,
                 )
             else:
@@ -89,7 +89,18 @@ async def send(event):
     thumb = thumb_image_path if os.path.exists(thumb_image_path) else None
     input_str = event.pattern_match.group(1)
     the_plugin_file = f"./userbot/plugins/{input_str}.py"
+    repo_link = os.environ.get("UPSTREAM_REPO")
+    if repo_link == "goodcat":
+        repo_link = "https://github.com/sandy1709/catuserbot"
+    if repo_link == "badcat":
+        repo_link = "https://github.com/Jisan09/catuserbot"
+    repo_branch = os.environ.get("UPSTREAM_REPO_BRANCH") or "master"
+    git_link = f"<a href= {repo_link}/blob/{repo_branch}/userbot/plugins/{input_str}.py>GitHub</a>"
+    raw_link = (
+        f"<a href= {repo_link}/raw/{repo_branch}/userbot/plugins/{input_str}.py>Raw</a>"
+    )
     if os.path.exists(the_plugin_file):
+        datetime.now()
         caat = await event.client.send_file(
             event.chat_id,
             the_plugin_file,
@@ -97,11 +108,17 @@ async def send(event):
             allow_cache=False,
             reply_to=reply_to_id,
             thumb=thumb,
-            caption=f"**➥ Plugin Name:-** `{input_str}`",
+            parse_mode="html",
+            caption=f"""
+<b>〣 Plugin Name:- {input_str}
+〣 Raw Text:- {raw_link} | {git_link}
+〣 Uploaded by {hmention}</b>""",
         )
         await event.delete()
+
     else:
-        await edit_or_reply(event, "404: File Not Found")
+        await edit_delete(event, "**404: File Not Found**")
+
 
 
 @catub.cat_cmd(
@@ -152,6 +169,36 @@ async def unload(event):
         CMD_HELP.pop(shortname)
     try:
         remove_plugin(shortname)
-        await edit_or_reply(event, f"{shortname} is Uninstalled successfully")
+        await edit_or_reply(event, f"{shortname} Is Uɴɪɴsᴛᴀʟʟᴇᴅ Sᴜᴄᴄᴇssғᴜʟʟʏ")
     except Exception as e:
         await edit_or_reply(event, f"Successfully uninstalled {shortname}\n{e}")
+
+@catub.cat_cmd(
+    pattern="getad ([\s\S]*)",
+    command=("getad", plugin_category),
+    info={
+        "header": "To install a plugin from github raw link.",
+        "description": "Install plugin from github raw link. ",
+        "usage": "{tr}getad <raw link>",
+    },
+)
+async def get_the_addons(event):
+    link = event.pattern_match.group(1)
+    xx = await edit_or_reply(event, "`Processing...`")
+    msg = "`Give raw link or Die!`"
+    if link is None:
+        return await edit_delete(xx, msg)
+    split_link = link.split("/")
+    if "raw" not in link:
+        return await edit_delete(xx, msg)
+    name = split_link[(len(split_link) - 1)]
+    plug = requests.get(link).text
+    fil = f"userbot/plugins/{name}"
+    with open(fil, "w", encoding="utf-8") as pepe:
+        pepe.write(plug)
+    shortname = name.split(".")[0]
+    try:
+        load_module(shortname)
+        await edit_delete(xx, "**Sᴜᴄᴄᴇssғᴜʟʟʏ Lᴏᴀᴅᴇᴅ** `{}`".format(shortname), 10)
+    except Exception:
+        await edit_delete(xx, "Error with {shortname}\n`{e}`")
