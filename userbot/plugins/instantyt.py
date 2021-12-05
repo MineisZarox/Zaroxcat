@@ -24,7 +24,7 @@ def is_url(link):
     return url
 
 @catub.cat_cmd(
-    pattern="iyt(?:\s|$)([\s\S]*)",
+    pattern="iyt( a)?(?:\s|$)([\s\S]*)",
     command=("iyt", plugin_category),
     info={
         "header": "To download youtube video/shorts instantly",
@@ -38,7 +38,8 @@ async def _(zarox):
     "For downloading yt video/shorts instantly"
     chat = "@youtubednbot"
     reply_to_id = await reply_id(zarox)
-    B = zarox.pattern_match.group(1)
+    C = zarox.pattern_match.group(1)
+    B = zarox.pattern_match.group(2)
     A = await zarox.get_reply_message()
     if A and A.message and not B:
         if "youtu" in A.message:
@@ -71,12 +72,18 @@ async def _(zarox):
                 return await edit_or_reply(zarox, "`Coundnt able to download the video. Try again later`")
             start = datetime.now()
             try:
-                msg = await conv.send_message(mine, link_preview=True)
+                if C:
+                    msg = await conv.send_message(f"/a {mine}", link_preview=True)
+                else:
+                    msg = await conv.send_message(mine, link_preview=True)
                 await asyncio.sleep(0.1)
                 video = await conv.get_response()
             except TimeoutError:
-                await zarox.client.delete_messages(conv.chat_id, [video.id])
-                msg = await conv.send_message(mine, link_preview=True)
+                await zarox.client.delete_messages(conv.chat_id, [msg.id])
+                if C:
+                    msg = await conv.send_message(f"/a {mine}", link_preview=True)
+                else:
+                    msg = await conv.send_message(mine, link_preview=True)
                 await asyncio.sleep(0.1)
                 video = await conv.get_response()
             await zarox.client.send_read_acknowledge(conv.chat_id)
