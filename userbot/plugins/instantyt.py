@@ -68,7 +68,7 @@ async def _(zarox):
                 video = await conv.get_response()
             except TimeoutError:
                 await zarox.client.delete_messages(conv.chat_id, [video.id])
-                msg = await conv.send_message(mine)
+                msg = await conv.send_message(mine, link_preview=True)
                 await asyncio.sleep(0.1)
                 video = await conv.get_response()
             await zarox.client.send_read_acknowledge(conv.chat_id)
@@ -78,11 +78,7 @@ async def _(zarox):
         await zarox.delete()
         end = datetime.now()
         ms = (end - start).seconds
-        if "short" in mine:
-        	link = f"**➥Youtube short:**"
-        else:
-        	link = f"**➥Youtube video:**"
-        caption = f"**➥ Video uploaded in {ms} seconds.**\n{link} [Link]({mine})"
+        caption = f"[{msg.media.webpage.title}]({reply.message})\n`➥In: {ms} seconds`"
         cat = await zarox.client.send_file(
             zarox.chat_id,
             video,
