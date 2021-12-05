@@ -20,7 +20,9 @@ vlist = [
     "ALIVE_TEMPLATE",
     "ALIVE_TEXT",
     "ALLOW_NSFW",
+    "EXTRA_PIC
     "HELP_EMOJI",
+    "HELP_PIC"
     "HELP_TEXT",
     "IALIVE_PIC",
     "PM_PIC",
@@ -30,7 +32,7 @@ vlist = [
     "START_TEXT",
     "NO_OF_ROWS_IN_HELP",
     "NO_OF_COLUMNS_IN_HELP",
-    "CUSTOM_STICKER_PACKNAME",
+    "CUSTOM_STICKER_PACKNAME"",
 ]
 
 oldvars = {
