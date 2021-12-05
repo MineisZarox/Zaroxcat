@@ -56,6 +56,13 @@ async def _(zarox):
     await edit_or_reply(zarox, "**Downloading...**")
     async with zarox.client.conversation(chat) as conv:
         try:
+            await event.client(
+            functions.account.UpdateNotifySettingsRequest(
+                peer=chat,
+                settings=types.InputPeerNotifySettings(
+                    show_previews=False,
+                    silent=True,
+                ),
             try:
                 msg_start = await conv.send_message("/start")
                 response = await conv.get_response()
