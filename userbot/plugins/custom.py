@@ -20,7 +20,7 @@ vlist = [
     "ALIVE_TEMPLATE",
     "ALIVE_TEXT",
     "ALLOW_NSFW",
-    "EXTRA_PIC
+    "EXTRA_PIC",
     "HELP_EMOJI",
     "HELP_PIC"
     "HELP_TEXT",
