@@ -90,7 +90,7 @@ async def _(zarox):
         try:
             caption = f"[{msg.media.webpage.title}]({mine})\n`➥In: {ms} seconds`"
         except:
-            caption = ""
+            caption = f"`➥In: {ms} seconds`"
         cat = await zarox.client.send_file(
             zarox.chat_id,
             video,
