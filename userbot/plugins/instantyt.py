@@ -8,7 +8,6 @@ from datetime import datetime
 
 from . import hmention
 from userbot import catub
-from telethon import functions
 from ..helpers.utils import reply_id
 from ..helpers.functions import yt_search
 from ..core.managers import edit_delete, edit_or_reply
