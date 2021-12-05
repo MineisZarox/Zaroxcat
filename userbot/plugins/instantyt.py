@@ -63,7 +63,7 @@ async def _(zarox):
                 return await edit_or_reply(zarox, "`Coundnt able to download the video. Try again later`")
             start = datetime.now()
             try:
-                msg = await conv.send_message(mine)
+                msg = await conv.send_message(mine, link_preview=True)
                 await asyncio.sleep(0.1)
                 video = await conv.get_response()
             except TimeoutError:
