@@ -24,7 +24,7 @@ def is_url(link):
     return url
 
 @catub.cat_cmd(
-    pattern="iyt( a)?(?:\s|$)([\s\S]*)",
+    pattern="iyt(a)?(?:\s|$)([\s\S]*)",
     command=("iyt", plugin_category),
     info={
         "header": "To download youtube video/shorts instantly",
