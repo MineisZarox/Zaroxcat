@@ -24,7 +24,7 @@ def is_url(link):
     return url
 
 @catub.cat_cmd(
-    pattern="iyt(a)?(?:\s|$)([\s\S]*)",
+    pattern="(iyt)(a)?(?:\s|$)([\s\S]*)",
     command=("iyt", plugin_category),
     info={
         "header": "To download youtube video/shorts instantly",
@@ -38,8 +38,8 @@ async def _(zarox):
     "For downloading yt video/shorts instantly"
     chat = "@youtubednbot"
     reply_to_id = await reply_id(zarox)
-    C = zarox.pattern_match.group(1)
-    B = zarox.pattern_match.group(2)
+    C = zarox.pattern_match.group(2)
+    B = zarox.pattern_match.group(3)
     A = await zarox.get_reply_message()
     if A and A.message and not B:
         if "youtu" in A.message:
