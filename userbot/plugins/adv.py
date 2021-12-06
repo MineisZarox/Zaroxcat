@@ -1,5 +1,5 @@
 # this plugin is created by @MineisZarox and @Peterparker6
-import os
+"""import os
 import asyncio
 from telethon.errors.rpcerrorlist import YouBlockedUserError, UserAlreadyParticipantError
 from telethon.tl.functions.messages import ImportChatInviteRequest
@@ -92,3 +92,4 @@ async def _(event):
                 await event.client.send_file(event.chat_id,  file, force_document=False, caption=f"➥ Genrated by :- {mention}")
                 await event.client.delete_messages(event.chat_id, cat)
                 if os.path.exists(file):    os.remove(file)
+"""
