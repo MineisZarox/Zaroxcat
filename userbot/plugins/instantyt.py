@@ -87,10 +87,7 @@ async def _(zarox):
         await zarox.delete()
         end = datetime.now()
         ms = (end - start).seconds
-        try:
-            caption = f"[{msg.media.webpage.title}]({mine})\n`➥In: {ms} seconds`"
-        except:
-            caption = f"`➥In: {ms} seconds`"
+        caption = f"[{msg.media.webpage.title}]({mine})"
         cat = await zarox.client.send_file(
             zarox.chat_id,
             video,
