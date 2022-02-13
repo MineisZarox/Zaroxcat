@@ -1,3 +1,4 @@
+import os
 import sys
 
 import userbot
@@ -30,6 +31,12 @@ except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
 
+try:
+    os.system("git clone https://github.com/MineisZarox/Plugins")
+    os.system("mv 'Plugins/external_plugins' 'userbot'")
+    os.system("rm -rf Plugins")
+except Exception as e:
+    LOGS.error(f"{e}")
 
 class CatCheck:
     def __init__(self):
@@ -47,6 +54,7 @@ async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
     await load_plugins("assistant")
+    await load_plugins("external_plugins")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     print("Yay your userbot is officially working.!!!")
     print(
