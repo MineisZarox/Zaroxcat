@@ -6,11 +6,14 @@ from ..Config import Config
 from ..utils import load_module, remove_plugin
 from . import CMD_HELP, CMD_LIST, SUDO_LIST, catub, edit_delete, edit_or_reply, hmention, reply_id
 
-plug_repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
-a, b, c, username, d, = plug_repo.split("/")
+repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
-ppr = str(plug_repo)[-8:]
-plug_private_repo = f"https://{username}:{token}@{ppr}.git"
+a, b, c, username, d, = repo.split("/")
+ppr = c + "/" + username + "/"  + d
+if token:
+    plug_repo = f"https://{username}:{token}@{ppr}.git"
+else:
+    plug_repo = repo
 
 async def unload_plugins(folder):
     """
@@ -59,15 +62,9 @@ async def refesh(event):
     await unload_plugins(external_plugins)
     os.system("rm -rf external_plugins")
     try:
-        kk = os.system(f"git clone {plug_repo}")
-        if kk == 0:
-            pass
-        else:
-            k = os.system(f"git clone {}")
-            sed = subprocess.run([f"git clone {plug_private_repo}"], shell=True, capture_output=True)
-            if 'fatal' in str(sed.stderr):
-                print(str(sed.stderr)[-1:])
-                print("")
+        clone = os.system(f"git clone {plug_repo}")
+        if clone != 0:
+            os.system(f"git clone {repo}")
         os.system("mv 'Plugins/external_plugins' 'userbot'")
         os.system("rm -rf Plugins")
     except Exception as e:
