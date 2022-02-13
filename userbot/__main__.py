@@ -30,9 +30,11 @@ try:
 except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
+    
+plug_repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
 
 try:
-    os.system("git clone https://github.com/MineisZarox/Plugins")
+    os.system(f"git clone {plug_repo}")
     os.system("mv 'Plugins/external_plugins' 'userbot'")
     os.system("rm -rf Plugins")
 except Exception as e:
