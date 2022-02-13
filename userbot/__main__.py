@@ -34,10 +34,10 @@ except Exception as e:
 
 
 plug_repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
-#username = os.environ.get()
+a, b, c, username, d, = plug_repo.split("/")
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
-#ppr = str(plug_repo)[-8:]
-#plug_private_repo = f"https://{username}:{token}@{ppr}.git"
+ppr = str(plug_repo)[-8:]
+plug_private_repo = f"https://{username}:{token}@{ppr}.git"
 
 try:
     kk = os.system(f"git clone {plug_repo}")
