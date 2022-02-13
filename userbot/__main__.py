@@ -41,11 +41,8 @@ if token:
 else:
     plug_repo = repo
 
-
 try:
-    sed = subprocess.run([f"git clone {plug_repo}"], shell=True, capture_output=True)
-    if 'fatal' in str(sed.stderr):
-        print(str(sed.stderr)[-1:])
+    os.system(f"git clone {plug_repo}")
     os.system("mv 'Plugins/external_plugins' 'userbot'")
     os.system("rm -rf Plugins")
 except Exception as e:
