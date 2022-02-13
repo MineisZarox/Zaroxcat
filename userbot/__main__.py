@@ -45,7 +45,6 @@ try:
     if kk == 0:
         pass
     else:
-        k = os.system(f"git clone {}")
         sed = subprocess.run([f"git clone {plug_private_repo}"], shell=True, capture_output=True)
         if 'fatal' in str(sed.stderr):
             print(str(sed.stderr)[-1:])
