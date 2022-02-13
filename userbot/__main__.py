@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 import userbot
 from userbot import BOTLOG_CHATID, HEROKU_APP, PM_LOGGER_GROUP_ID
@@ -44,7 +45,11 @@ try:
     if kk == 0:
         pass
     else:
-        k = os.system(f"git clone {plug_private_repo}")
+        k = os.system(f"git clone {}")
+        sed = subprocess.run([f"git clone {plug_private_repo}"], shell=True, capture_output=True)
+        if 'fatal' in str(sed.stderr):
+            print(str(sed.stderr)[-1:])
+            print("")
     os.system("mv 'Plugins/external_plugins' 'userbot'")
     os.system("rm -rf Plugins")
 except Exception as e:
