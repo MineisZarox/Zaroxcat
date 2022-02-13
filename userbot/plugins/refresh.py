@@ -49,7 +49,7 @@ async def unload_plugins(folder):
                 LOGS.info(f"unable to load {shortname} because of error {e}")
 
 @catub.cat_cmd(
-    pattern="refresh$",
+    pattern="refresh $",
     command=("refresh", plugin_category),
     info={
         "header": "To install an external plugin.",
@@ -61,11 +61,13 @@ async def refesh(event):
     ""
     await unload_plugins(external_plugins)
     os.system("rm -rf external_plugins")
+    catevent = await edit_or_reply("`Removing old Plugins`")
     try:
         clone = os.system(f"git clone {plug_repo}")
         if clone != 0:
             os.system(f"git clone {repo}")
         os.system("mv 'Plugins/external_plugins' 'userbot'")
         os.system("rm -rf Plugins")
+        await catevent.edit("`Refreshed all external plugins`")
     except Exception as e:
         LOGS.error(f"{e}")
