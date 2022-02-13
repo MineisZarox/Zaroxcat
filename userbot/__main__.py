@@ -32,7 +32,7 @@ except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
     
-repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
+repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
 a, b, c, username, d, = repo.split("/")
 ppr = str(repo)[-8:]
@@ -64,7 +64,8 @@ async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
     await load_plugins("assistant")
-    print("Importing External plugins")
+    if repo:
+        print("Importing External plugins")
     await load_plugins("external_plugins")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     print("Yay your userbot is officially working.!!!")
