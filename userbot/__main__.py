@@ -35,7 +35,7 @@ except Exception as e:
 repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
 a, b, c, username, d, = plug_repo.split("/")
-ppr = str(plug_repo)[-8:]
+ppr = str(repo)[-8:]
 if token:
     plug_repo = f"https://{username}:{token}@{ppr}.git"
 else:
