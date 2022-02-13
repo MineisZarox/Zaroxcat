@@ -32,23 +32,20 @@ except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
     
-
-
-plug_repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
-a, b, c, username, d, = plug_repo.split("/")
+repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
+a, b, c, username, d, = plug_repo.split("/")
 ppr = str(plug_repo)[-8:]
-plug_private_repo = f"https://{username}:{token}@{ppr}.git"
+if token:
+    plug_repo = f"https://{username}:{token}@{ppr}.git"
+else:
+    plug_repo = repo
+
 
 try:
-    kk = os.system(f"git clone {plug_repo}")
-    if kk == 0:
-        pass
-    else:
-        sed = subprocess.run([f"git clone {plug_private_repo}"], shell=True, capture_output=True)
-        if 'fatal' in str(sed.stderr):
-            print(str(sed.stderr)[-1:])
-            print("")
+    sed = subprocess.run([f"git clone {plug_repo}"], shell=True, capture_output=True)
+    if 'fatal' in str(sed.stderr):
+        print(str(sed.stderr)[-1:])
     os.system("mv 'Plugins/external_plugins' 'userbot'")
     os.system("rm -rf Plugins")
 except Exception as e:
