@@ -31,10 +31,20 @@ except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
     
+
+
 plug_repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Plugins"
+#username = os.environ.get()
+token = os.environ.get("GITHUB_ACCESS_TOKEN")
+#ppr = str(plug_repo)[-8:]
+#plug_private_repo = f"https://{username}:{token}@{ppr}.git"
 
 try:
-    os.system(f"git clone {plug_repo}")
+    kk = os.system(f"git clone {plug_repo}")
+    if kk == 0:
+        pass
+    else:
+        k = os.system(f"git clone {plug_private_repo}")
     os.system("mv 'Plugins/external_plugins' 'userbot'")
     os.system("rm -rf Plugins")
 except Exception as e:
