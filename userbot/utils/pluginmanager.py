@@ -59,6 +59,7 @@ def load_module(shortname, plugin_path=None):
         # for imports
         sys.modules["userbot.plugins." + shortname] = mod
         LOGS.info("Successfully imported " + shortname)
+    return shortname
 
 
 def remove_plugin(shortname):
