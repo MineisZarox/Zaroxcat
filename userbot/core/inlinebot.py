@@ -30,7 +30,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-CATLOGO = "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
+CATLOGO = gvarstatus("INLINE_PIC") or "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -222,11 +222,35 @@ async def inline_handler(event):  # sourcery no-metrics
         match2 = re.findall(inf, query)
         hid = re.compile("hide (.*)")
         match3 = re.findall(hid, query)
+        if query.startswith("ping"):
+            txt = f"• Ping • {mention} •"
+            button = [(Button.inline("Check", data="ping"))]
+            PIC = random.choice(gvarstatus("PING_PICS").split())
+            if PIC and PIC.endswith((".jpg", ".jpeg", ".png")):  # fk it im adding
+                result = builder.photo(
+                    PIC,
+                    text=txt,
+                    buttons=button,
+                )
+            elif PIC:
+                result = builder.document(
+                    PIC,
+                    title="Check Ping",
+                    text=txt,
+                    buttons=button,
+                )
+            else:
+                result = builder.article(
+                    title="Check Ping",
+                    text=txt,
+                    buttons=button,
+                )
+            await event.answer([result] if result else None)
         if query.startswith("**Catuserbot"):
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/TgCatUB/catuserbot"),
+                    Button.url("Repo", "https://github.com/MineisZarox/Zaroxcat"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -419,13 +443,29 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newhide, open(hide, "w"))
         elif string == "help":
             _result = main_menu()
-            result = builder.article(
-                title="© CatUserbot Help",
-                description="Help menu for CatUserbot",
-                text=_result[0],
-                buttons=_result[1],
-                link_preview=False,
-            )
+            HELP_PIC = gvarstatus("HELP_PIC")
+            if HELP_PIC and HELP_PIC.endswith((".jpg", ".jpeg", ".png")):
+                result = builder.photo(
+                    HELP_PIC,
+                    #title="Help Menu",
+                    text=_result[0],
+                    buttons=_result[1],
+                )
+            elif HELP_PIC:
+                result = builder.document(
+                    HELP_PIC,
+                    title="Help Menu",
+                    text=_result[0],
+                    buttons=_result[1],
+                )
+            else:
+                result = builder.article(
+                    title="© CatUserbot Help",
+                    description="Help menu for CatUserbot",
+                    text=_result[0],
+                    buttons=_result[1],
+                    link_preview=True,
+                )
             await event.answer([result] if result else None)
         elif str_y[0].lower() == "ytdl" and len(str_y) == 2:
             link = get_yt_video_id(str_y[1].strip())
@@ -557,10 +597,10 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("Source code", "https://github.com/TgCatUB/catuserbot"),
+                Button.url("Source code", "https://github.com/MineisZarox/Zaroxcat"),
                 Button.url(
                     "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack",
+                    "https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FJisan09%2Fcatpack",
                 ),
             )
         ]
@@ -576,7 +616,7 @@ async def inline_handler(event):  # sourcery no-metrics
             type="photo",
             title="𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩",
             description="Deploy yourself",
-            url="https://github.com/TgCatUB/catuserbot",
+            url="https://github.com/MineisZarox/Zaroxcat",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(
