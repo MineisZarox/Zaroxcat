@@ -116,7 +116,7 @@ async def aexec(code, smessatatus):
     zarox = event
     exec(
         (
-            "async def __aexec(message, event , reply, client, p, chat, event): "
+            "async def __aexec(message, event , reply, client, p, chat, zarox): "
             + "".join(f"\n {l}" for l in code.split("\n"))
         )
     )
