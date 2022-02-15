@@ -152,18 +152,6 @@ async def load_plugins(folder):
                 os.remove(Path(f"userbot/{folder}/{shortname}.py"))
                 LOGS.info(f"unable to load {shortname} because of error {e}")
 
-def plug_repo():
-    repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
-    token = os.environ.get("GITHUB_ACCESS_TOKEN")
-    a, b, c, username, d, = repo.split("/")
-    ppr = c + "/" + username + "/"  + d
-    if token:
-        plug_repo = f"https://{username}:{token}@{ppr}.git"
-    else:
-        plug_repo = repo
-    return plug_repo
-
-
 async def verifyLoggerGroup():
     """
     Will verify the both loggers group
@@ -231,4 +219,3 @@ async def verifyLoggerGroup():
         os.execle(executable, *args, os.environ)
         sys.exit(0)
 
-plug_repo = plug_repo()
