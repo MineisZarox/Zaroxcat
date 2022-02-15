@@ -29,11 +29,30 @@ except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
 
+def plug_repo():
+    repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
+    token = os.environ.get("GITHUB_ACCESS_TOKEN")
+    a, b, c, username, d, = repo.split("/")
+    ppr = c + "/" + username + "/"  + d
+    if token:
+        plug_repo = f"https://{username}:{token}@{ppr}.git"
+    else:
+        plug_repo = repo
+    return plug_repo
 
 async def startup_process():
     await verifyLoggerGroup()
+    try:
+        plug_repo = plug_repo()
+        os.system(f"git clone {plug_repo}")
+        os.system("mv 'Plugins/external_plugins' 'userbot'")
+        os.system("rm -rf Plugins")
+    except Exception as e:
+        print(e) 
     await load_plugins("plugins")
     await load_plugins("assistant")
+    print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+    await load_plugins("ext_plugins")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     print("Yay your userbot is officially working.!!!")
     print(
