@@ -45,7 +45,7 @@ async def startup_process():
     try:
         plug_repo = plug_repo()
         os.system(f"git clone {plug_repo}")
-        os.system("mv 'Plugins/external_plugins' 'userbot'")
+        os.system("mv 'Plugins/ext_plugins' 'userbot'")
         os.system("rm -rf Plugins")
     except Exception as e:
         print(e) 
