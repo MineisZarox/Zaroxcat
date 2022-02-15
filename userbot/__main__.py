@@ -10,7 +10,6 @@ from .utils import (
     add_bot_to_logger_group,
     load_plugins,
     setup_bot,
-    plug_repo,
     startupmessage,
     verifyLoggerGroup,
 )
