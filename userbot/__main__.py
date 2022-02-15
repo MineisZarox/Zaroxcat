@@ -31,19 +31,16 @@ except Exception as e:
 
 repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
-def plug_repo():
-    a, b, c, username, d, = repo.split("/")
-    ppr = c + "/" + username + "/"  + d
-    if token:
-        plug_repo = f"https://{username}:{token}@{ppr}.git"
-    else:
-        plug_repo = repo
-    return plug_repo
+a, b, c, username, d, = repo.split("/")
+ppr = c + "/" + username + "/"  + d
+if token:
+    plug_repo = f"https://{username}:{token}@{ppr}.git"
+else:
+    plug_repo = repo
 
 async def startup_process():
     await verifyLoggerGroup()
     try:
-        plug_repo = plug_repo()
         os.system(f"git clone {plug_repo}")
         os.system("mv 'Plugins/ext_plugins' 'userbot'")
         os.system("rm -rf Plugins")
