@@ -21,14 +21,6 @@ print("Licensed under the terms of the " + userbot.__license__)
 
 cmdhr = Config.COMMAND_HAND_LER
 
-try:
-    LOGS.info("Starting Userbot")
-    catub.loop.run_until_complete(setup_bot())
-    LOGS.info("TG Bot Startup Completed")
-except Exception as e:
-    LOGS.error(f"{e}")
-    sys.exit()
-
 repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
 a, b, c, username, d, = repo.split("/")
@@ -37,6 +29,14 @@ if token:
     plug_repo = f"https://{username}:{token}@{ppr}.git"
 else:
     plug_repo = repo
+
+try:
+    LOGS.info("Starting Userbot")
+    catub.loop.run_until_complete(setup_bot())
+    LOGS.info("TG Bot Startup Completed")
+except Exception as e:
+    LOGS.error(f"{e}")
+    sys.exit()
 
 async def startup_process():
     await verifyLoggerGroup()
