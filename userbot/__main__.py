@@ -49,6 +49,7 @@ except Exception as e:
 async def startup_process():
     await verifyLoggerGroup()
     await load_plugins("plugins")
+    print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     await load_plugins("assistant")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     await load_plugins("ext_plugins")
