@@ -61,6 +61,7 @@ async def _(event):
 )
 async def _(event):
     "To Execute python script/statements in a subprocess."
+    zarox = event
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return await edit_delete(event, "`What should i run ?..`")
@@ -112,6 +113,7 @@ async def aexec(code, smessatatus):
     message = event = smessatatus
     p = lambda _x: print(_format.yaml_format(_x))
     reply = await event.get_reply_message()
+    zarox = event
     exec(
         (
             "async def __aexec(message, event , reply, client, p, chat): "
@@ -120,5 +122,5 @@ async def aexec(code, smessatatus):
     )
 
     return await locals()["__aexec"](
-        message, event, reply, message.client, p, message.chat_id
+        message, event, reply, message.client, p, message.chat_id, zarox
     )
