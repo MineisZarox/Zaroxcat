@@ -32,16 +32,9 @@ except Exception as e:
 
 async def startup_process():
     await verifyLoggerGroup()
-    try:
-        os.system(f"git clone {plug_repo}")
-        os.system("mv 'Plugins/ext_plugins' 'userbot'")
-        os.system("rm -rf Plugins")
-    except Exception as e:
-        print(e) 
     await load_plugins("plugins")
     await load_plugins("assistant")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-    await load_plugins("ext_plugins")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     print("Yay your userbot is officially working.!!!")
     print(
