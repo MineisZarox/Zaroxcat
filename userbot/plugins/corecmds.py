@@ -12,7 +12,7 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 
 
 @catub.cat_cmd(
-    pattern="install$",
+    pattern="(install|i)$",
     command=("install", plugin_category),
     info={
         "header": "To install an external plugin.",
@@ -89,6 +89,16 @@ async def send(event):
     thumb = thumb_image_path if os.path.exists(thumb_image_path) else None
     input_str = event.pattern_match.group(1)
     the_plugin_file = f"./userbot/plugins/{input_str}.py"
+    repo_link = os.environ.get("UPSTREAM_REPO")
+    if repo_link == "goodcat":
+        repo_link = "https://github.com/sandy1709/catuserbot"
+    if repo_link == "badcat":
+        repo_link = "https://github.com/Jisan09/catuserbot"
+    repo_branch = os.environ.get("UPSTREAM_REPO_BRANCH") or "master"
+    git_link = f"<a href= {repo_link}/blob/{repo_branch}/userbot/plugins/{input_str}.py>GitHub</a>"
+    raw_link = (
+        f"<a href= {repo_link}/raw/{repo_branch}/userbot/plugins/{input_str}.py>Raw</a>"
+    )
     if os.path.exists(the_plugin_file):
         caat = await event.client.send_file(
             event.chat_id,
@@ -97,7 +107,11 @@ async def send(event):
             allow_cache=False,
             reply_to=reply_to_id,
             thumb=thumb,
-            caption=f"**➥ Plugin Name:-** `{input_str}`",
+            caption=f"""
+<b>〣 Plugin Name:- {input_str}
+〣 Raw Text:- {raw_link} | {git_link}
+〣 Uploaded by {hmention}</b>""",
+            parse_mode="html",
         )
         await event.delete()
     else:
@@ -125,7 +139,7 @@ async def unload(event):
 
 
 @catub.cat_cmd(
-    pattern="uninstall ([\s\S]*)",
+    pattern="(uninstall|ui) ([\s\S]*)",
     command=("uninstall", plugin_category),
     info={
         "header": "To uninstall a plugin temporarily.",
@@ -137,7 +151,7 @@ async def unload(event):
 )
 async def unload(event):
     "To uninstall a plugin."
-    shortname = event.pattern_match.group(1)
+    shortname = event.pattern_match.group(2)
     path = Path(f"userbot/plugins/{shortname}.py")
     if not os.path.exists(path):
         return await edit_delete(
