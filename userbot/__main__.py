@@ -33,7 +33,7 @@ else:
 
 try:
     os.system(f"git clone {plug_repo}")
-    os.system("mv 'Plugins/external_plugins' 'userbot'")
+    os.system("mv 'Plugins/ext_plugins' 'userbot'")
     os.system("rm -rf Plugins")
 except Exception as e:
     LOGS.error(f"{e}")
@@ -51,6 +51,7 @@ async def startup_process():
     await load_plugins("plugins")
     await load_plugins("assistant")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+    await load_plugins("ext_plugins")
     print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
     print("Yay your userbot is officially working.!!!")
     print(
