@@ -10,6 +10,7 @@ from .utils import (
     add_bot_to_logger_group,
     load_plugins,
     setup_bot,
+    plug_repo,
     startupmessage,
     verifyLoggerGroup,
 )
@@ -20,15 +21,6 @@ print(userbot.__copyright__)
 print("Licensed under the terms of the " + userbot.__license__)
 
 cmdhr = Config.COMMAND_HAND_LER
-
-repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
-token = os.environ.get("GITHUB_ACCESS_TOKEN")
-a, b, c, username, d, = repo.split("/")
-ppr = c + "/" + username + "/"  + d
-if token:
-    plug_repo = f"https://{username}:{token}@{ppr}.git"
-else:
-    plug_repo = repo
 
 try:
     LOGS.info("Starting Userbot")
