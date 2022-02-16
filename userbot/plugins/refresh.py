@@ -27,10 +27,12 @@ async def refesh(event):
         res = [sub.replace('.py', '') for sub in k]
         for i in res:
             rem(i)
-        os.system("rm -rf userbot/ext_plugins")
+        if os.path.exists("userbot/ext_plugins"):
+            os.remove("userbot/ext_plugins")
         os.system(f"git clone {plug_repo}")
         os.system("mv 'Plugins/ext_plugins' 'userbot'")
-        os.system("rm -rf Plugins")
+        if os.path.exists("Plugins"):
+            os.remove("Plugins")
         await edit_or_reply(event, "`Refreshed all ext plugins successfully`")
     except Exception as e:
         LOGS.error(f"{e}")
