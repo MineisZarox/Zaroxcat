@@ -1,7 +1,7 @@
 #By @IrisZarox
 import os
 import shutil as sl
-from ..utils import remove_plugin as rem
+from ..utils import load_plugins, remove_plugin as rem
 from . import catub, edit_delete, edit_or_reply
 
 plugin_category = "tools"
