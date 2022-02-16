@@ -27,7 +27,7 @@ async def refesh(event):
         res = [sub.replace('.py', '') for sub in k]
         for i in res:
             rem(i)
-        os.system("rm -rf ext_plugins")
+        os.system("rm -rf userbot/ext_plugins")
         os.system(f"git clone {plug_repo}")
         os.system("mv 'Plugins/ext_plugins' 'userbot'")
         os.system("rm -rf Plugins")
