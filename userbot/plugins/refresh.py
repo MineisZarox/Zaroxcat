@@ -1,5 +1,6 @@
 #By @IrisZarox
 import os
+import shutil as sl
 from ..utils import remove_plugin as rem
 from . import catub, edit_delete, edit_or_reply
 
@@ -30,12 +31,10 @@ async def refesh(event):
         res = [sub.replace('.py', '') for sub in k]
         for i in res:
             rem(i)
-        if os.path.exists("userbot/ext_plugins"):
-            os.remove("userbot/ext_plugins")
+        sl.rmtree("userbot/ext_plugins")
         os.system(f"git clone {plug_repo}")
         os.system("mv 'Plugins/ext_plugins' 'userbot'")
-        if os.path.exists("Plugins"):
-            os.remove("Plugins")
+        sl.rmtree("Plugins")
         await load_plugins("ext_plugins")
         await edit_or_reply(event, "`Refreshed all ext plugins successfully`")
     except Exception as e:
