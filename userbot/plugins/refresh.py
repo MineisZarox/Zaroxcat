@@ -2,6 +2,8 @@ import os
 from ..utils import remove_plugin as rem
 from . import catub, edit_delete, edit_or_reply
 
+plugin_category = "tools"
+
 repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
 a, b, c, username, d, = repo.split("/")
