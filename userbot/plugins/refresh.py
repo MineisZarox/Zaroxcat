@@ -1,3 +1,4 @@
+#By @IrisZarox
 import os
 from ..utils import remove_plugin as rem
 from . import catub, edit_delete, edit_or_reply
@@ -35,6 +36,7 @@ async def refesh(event):
         os.system("mv 'Plugins/ext_plugins' 'userbot'")
         if os.path.exists("Plugins"):
             os.remove("Plugins")
+        await load_plugins("ext_plugins")
         await edit_or_reply(event, "`Refreshed all ext plugins successfully`")
     except Exception as e:
         LOGS.error(f"{e}")
