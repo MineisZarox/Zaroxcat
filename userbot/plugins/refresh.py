@@ -1,5 +1,6 @@
 #By @IrisZarox
 import os
+import heroku3
 import shutil as sl
 from ..Config import Config
 from ..utils import load_plugins, remove_plugin as rem
