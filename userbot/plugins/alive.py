@@ -23,6 +23,30 @@ from . import mention
 
 plugin_category = "utils"
 
+ANIME_QUOTE = [
+    "✮ One’s act, one’s profit 🖤",
+    "✮ Ten men, ten colors 🖤",
+    "✮ Wake from death and return to life 🖤",
+    "✮ Evil cause, evil effect 🖤",
+    "✮ The weak are meat; the strong eat 🖤",
+    "✮ Drunken life, dreamy death 🖤",
+    "✮ One life, one encounter  🖤",
+    "✮ Different body, same mind 🖤",
+    "✮ Meeting person always separated 🖤",
+    "✮ Beautiful person, thin life 🖤",
+    "✮ Work of self, obtainment of self 🖤",
+    "✮ If you do not enter the tiger’s cave, you will not catch its cub  🖤",
+    "✮ Even monkeys fall from trees 🖤",
+    "✮ There are even bugs that eat knotweed 🖤",
+    "✮ Spilt water will not return to the tray 🖤",
+    "✮ Gold coins to a cat 🖤",
+    "✮ A frog in a well does not know the great sea 🖤",
+    "✮ One who chases after two hares won’t catch even one 🖤",
+    "✮ An apprentice near a temple will recite the scriptures untaught  🖤",
+    "✮ Fall down seven times, stand up eight 🖤",
+    "✮ Unless an idiot dies, he won’t be cured 🖤",
+    "✮ Give up on your dreams and die 🖤",
+]
 
 @catub.cat_cmd(
     pattern="alive$",
@@ -37,6 +61,7 @@ plugin_category = "utils"
 )
 async def amireallyalive(event):
     "A kind of showing bot details"
+    ANIME = f"{random.choice(ANIME_QUOTE)}"
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
@@ -45,7 +70,7 @@ async def amireallyalive(event):
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ MY BOT IS RUNNING SUCCESSFULLY ✮**"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or ANIME
     CAT_IMG = gvarstatus("ALIVE_PIC")
     cat_caption = gvarstatus("ALIVE_TEMPLATE") or temp
     caption = cat_caption.format(
@@ -79,13 +104,16 @@ async def amireallyalive(event):
         )
 
 
-temp = """{ALIVE_TEXT}
-**{EMOJI} Database :** `{dbhealth}`
-**{EMOJI} Telethon Version :** `{telever}`
-**{EMOJI} Catuserbot Version :** `{catver}`
-**{EMOJI} Python Version :** `{pyver}`
-**{EMOJI} Uptime :** `{uptime}`
-**{EMOJI} Master:** {mention}"""
+temp = """**{CUSTOM_ALIVE_TEXT}**
+┏━━━━━━━━━━━━━━━━┓
+┃**{EMOJI} ᴜꜱᴇʀʙᴏᴛ ᴠᴇʀꜱɪᴏɴ:** `{catversion}`
+┃**{EMOJI} ᴅᴇᴀᴅ ꜱɪɴᴄᴇ:** `{uptime}
+┃**{EMOJI} ꜱᴇɴꜱᴇɪ:** {mention}
+┃**{EMOJI} ꜱᴛᴀᴛᴜꜱ:** `{dbhealth}`
+┗━━━━━━━━━━━━━━━━┛
+┏━━━━━━━━━━━━━━┓
+┃ ⁭⁫**{EMOJI} ᴘɪɴɢ :** {ms} ms 
+┗━━━━━━━━━━━━━━┛"""
 
 
 @catub.cat_cmd(
