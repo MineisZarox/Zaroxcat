@@ -56,7 +56,7 @@ async def refesh(event):
         res = [sub.replace('.py', '') for sub in k]
         for i in res:
             rem(i)
-        sl.rmtree(f"userbot/{exact_fld}}")
+        sl.rmtree(f"userbot/{exact_fld}")
         os.system(f"git clone {repo}")
         os.system(f"mv '{fld}' 'userbot'")
         sl.rmtree(repo_fld)
