@@ -4,10 +4,12 @@ import heroku3
 import shutil as sl
 from ..Config import Config
 from ..utils import load_plugins, remove_plugin as rem
-from . import catub, edit_delete, edit_or_reply
+from . import catub, edit_delete, edit_or_reply, UPSTREAM_REPO_URL
 
 plugin_category = "tools"
 
+z, y, x, w, v, = UPSTREAM_REPO_URL.split("/")
+branch = Config.UPSTREAM_REPO_BRANCH or "master"
 # =================================================
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
@@ -28,7 +30,7 @@ else:
 # =================================================
     
 @catub.cat_cmd(
-    pattern="(refresh|re)$",
+    pattern="(refresh|re)( -def)$",
     command=("refresh", plugin_category),
     info={
         "header": "To refresh all external plugin.",
@@ -38,15 +40,26 @@ else:
 )
 
 async def refesh(event):
+    def = event.pattern_match.group(2)
+    if def:
+        exact_fld = "plugins"
+        repo = f"--single-branch --branch {branch} {UPSTREAM_REPO_URL}"
+        fld = f"{v}/userbot/plugins"
+        repo_fld = v
+    else:
+        exact_fld = "ext_plugins"
+        repo = plug_repo
+        fld = f"{d}/ext/plugins"
+        repo_fld = d
     try:
-        k = os.listdir("userbot/ext_plugins")
+        k = os.listdir(f"userbot/{exact_fld}")
         res = [sub.replace('.py', '') for sub in k]
         for i in res:
             rem(i)
-        sl.rmtree("userbot/ext_plugins")
-        os.system(f"git clone {plug_repo}")
-        os.system("mv 'Plugins/ext_plugins' 'userbot'")
-        sl.rmtree("Plugins")
+        sl.rmtree(f"userbot/{exact_fld}}")
+        os.system(f"git clone {repo}")
+        os.system(f"mv '{fld}' 'userbot'")
+        sl.rmtree(repo_fld)
         print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
         await load_plugins("ext_plugins")
         print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
