@@ -8,6 +8,7 @@ from . import catub, edit_delete, edit_or_reply, UPSTREAM_REPO_URL
 
 plugin_category = "tools"
 
+z, y, x, w, v, = UPSTREAM_REPO_URL.split("/")
 branch = Config.UPSTREAM_REPO_BRANCH or "master"
 # =================================================
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
@@ -46,10 +47,12 @@ async def refesh(event):
             res = [sub.replace('.py', '') for sub in k]
             for i in res:
                 rem(i)
+            await edit_or_reply(event, f"`Cloning to {v}...`")
             sl.rmtree("userbot/plugins")
             os.system(f"git clone --single-branch --branch {branch} {UPSTREAM_REPO_URL}")
             os.system("mv 'Zaroxcat/userbot/plugins' 'userbot'")
             sl.rmtree("Zaroxcat")
+            await edit_or_reply(event, f"`Installing default plugins...`")
             print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
             await load_plugins("plugins")
             print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
@@ -68,10 +71,12 @@ async def refesh(event):
             res = [sub.replace('.py', '') for sub in k]
             for i in res:
                 rem(i)
+            await edit_or_reply(event, f"`Cloning to {d}...`")
             sl.rmtree("userbot/ext_plugins")
             os.system(f"git clone {plug_repo}")
             os.system("mv 'Plugins/ext_plugins' 'userbot'")
             sl.rmtree("Plugins")
+            await edit_or_reply(event, f"`Installing external plugins...`")
             print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
             await load_plugins("ext_plugins")
             print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
