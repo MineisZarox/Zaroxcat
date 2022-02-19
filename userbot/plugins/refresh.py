@@ -40,8 +40,8 @@ else:
 )
 
 async def refesh(event):
-    def = event.pattern_match.group(2)
-    if def:
+    if_def = event.pattern_match.group(2)
+    if if_def:
         exact_fld = "plugins"
         repo = f"--single-branch --branch {branch} {UPSTREAM_REPO_URL}"
         fld = f"{v}/userbot/plugins"
