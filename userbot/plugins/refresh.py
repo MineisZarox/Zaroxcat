@@ -40,7 +40,7 @@ else:
 )
 
 async def refesh(event):
-    if_def = event.pattern_match.group(1)
+    """if_def = event.pattern_match.group(1)
     if if_def == " -def":
         try:
             k = os.listdir("userbot/plugins")
@@ -64,28 +64,27 @@ async def refesh(event):
             except BaseException:
                 return await edit_or_reply(event, "`Refreshed all default plugins successfully`")
         except Exception as e:
-            LOGS.error(f"{e}")
-    else:
+            LOGS.error(f"{e}")"""
+    try:
+        k = os.listdir("userbot/ext_plugins")
+        res = [sub.replace('.py', '') for sub in k]
+        for i in res:
+            rem(i)
+        await edit_or_reply(event, f"`Cloning to {d}...`")
+        sl.rmtree("userbot/ext_plugins")
+        os.system(f"git clone {plug_repo}")
+        os.system("mv 'Plugins/ext_plugins' 'userbot'")
+        sl.rmtree("Plugins")
+        await edit_or_reply(event, f"`Installing external plugins...`")
+        print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+        await load_plugins("ext_plugins")
+        print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
         try:
-            k = os.listdir("userbot/ext_plugins")
-            res = [sub.replace('.py', '') for sub in k]
-            for i in res:
-                rem(i)
-            await edit_or_reply(event, f"`Cloning to {d}...`")
-            sl.rmtree("userbot/ext_plugins")
-            os.system(f"git clone {plug_repo}")
-            os.system("mv 'Plugins/ext_plugins' 'userbot'")
-            sl.rmtree("Plugins")
-            await edit_or_reply(event, f"`Installing external plugins...`")
-            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-            await load_plugins("ext_plugins")
-            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-            try:
-                Heroku = heroku3.from_key(HEROKU_API_KEY)
-                app = Heroku.app(HEROKU_APP_NAME)
-                data = app.get_log()
-                await edit_or_reply(event, data, deflink=True, linktext="`Refreshed all external plugins successfully: `")
-            except BaseException:
-                return await edit_or_reply(event, "`Refreshed all external plugins successfully`")
-        except Exception as e:
-            LOGS.error(f"{e}")
+            Heroku = heroku3.from_key(HEROKU_API_KEY)
+            app = Heroku.app(HEROKU_APP_NAME)
+            data = app.get_log()
+            await edit_or_reply(event, data, deflink=True, linktext="`Refreshed all external plugins successfully: `")
+        except BaseException:
+            return await edit_or_reply(event, "`Refreshed all external plugins successfully`")
+    except Exception as e:
+        LOGS.error(f"{e}")
