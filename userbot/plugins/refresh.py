@@ -54,8 +54,8 @@ async def refesh(event):
             Heroku = heroku3.from_key(HEROKU_API_KEY)
             app = Heroku.app(HEROKU_APP_NAME)
             data = app.get_log()
-            await edit_or_reply(event, data, deflink=True, linktext="**Refreshed all ext plugins successfully: **")
+            await edit_or_reply(event, data, deflink=True, linktext="`Refreshed all external plugins successfully: `")
         except BaseException:
-            return await edit_or_reply(event, "`Refreshed all ext plugins successfully`")
+            return await edit_or_reply(event, "`Refreshed all external plugins successfully`")
     except Exception as e:
         LOGS.error(f"{e}")
