@@ -22,7 +22,7 @@ from .tools import create_supergroup
 
 LOGS = logging.getLogger("CatUserbot")
 cmdhr = Config.COMMAND_HAND_LER
-
+EXTRA = gvarstatus("EXTRA_PIC") or "https://telegra.ph/file/e9f733ff2e303f29a3544.mp4"
 
 async def setup_bot():
     """
@@ -61,7 +61,7 @@ async def startupmessage():
         if BOTLOG:
             Config.CATUBLOGO = await catub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/4e3ba8e8f7e535d5a2abe.jpg",
+                EXTRA,
                 caption="**Your CatUserbot has been started successfully.**",
                 buttons=[(Button.url("Support", "https://t.me/catuserbot"),)],
             )
@@ -79,7 +79,7 @@ async def startupmessage():
         if msg_details:
             await catub.check_testcases()
             message = await catub.get_messages(msg_details[0], ids=msg_details[1])
-            text = message.text + "\n\n**Ok Bot is Back and Alive.**"
+            text = message.text + f"\n\n**[Ok Bot is Back and Alive.]({EXTRA})**"
             await catub.edit_message(msg_details[0], msg_details[1], text)
             if gvarstatus("restartupdate") is not None:
                 await catub.send_message(
