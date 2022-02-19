@@ -4,23 +4,6 @@ from ..core.managers import edit_or_reply
 
 plugin_category = "fun"
 
-
-@catub.cat_cmd(
-    pattern="join$",
-    command=("join", plugin_category),
-    info={
-        "header": "Fun art.",
-        "usage": "{tr}join",
-    },
-)
-async def _(event):
-    "fun art"
-    await edit_or_reply(
-        event,
-        "`━━━━━┓ \n┓┓┓┓┓┃\n┓┓┓┓┓┃　ヽ○ノ ⇦ Me When You Joined \n┓┓┓┓┓┃.     /　 \n┓┓┓┓┓┃ ノ) \n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃\n┓┓┓┓┓┃`",
-    )
-
-
 @catub.cat_cmd(
     pattern="climb$",
     command=("climb", plugin_category),
