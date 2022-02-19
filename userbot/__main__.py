@@ -22,7 +22,7 @@ print("Licensed under the terms of the " + userbot.__license__)
 
 cmdhr = Config.COMMAND_HAND_LER
 
-repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
+repo = os.environ.get("EXTERNAL_PLUGIN_REPO") or "https://github.com/MineisZarox/Zaroxcat/tree/Zarox"
 token = os.environ.get("GITHUB_ACCESS_TOKEN")
 a, b, c, username, d, = repo.split("/")
 ppr = c + "/" + username + "/"  + d
@@ -33,7 +33,7 @@ else:
 
 try:
     os.system(f"git clone {plug_repo}")
-    os.system("mv 'Plugins/ext_plugins' 'userbot'")
+    os.system(f"mv '{d}/ext_plugins' 'userbot'")
     os.system("rm -rf Plugins")
 except Exception as e:
     LOGS.error(f"{e}")
