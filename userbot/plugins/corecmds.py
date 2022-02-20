@@ -110,7 +110,7 @@ async def send(event):
             caption=f"""
 <b>〣 Plugin Name:- {input_str}
 〣 Raw Text:- {raw_link} | {git_link}
-〣 Uploaded by {mention}</b>""",
+〣 Uploaded by</b> {mention}</b>""",
             parse_mode="html",
         )
         await event.delete()
