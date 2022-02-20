@@ -154,9 +154,11 @@ async def unload(event):
     shortname = event.pattern_match.group(2)
     path = Path(f"userbot/plugins/{shortname}.py")
     if not os.path.exists(path):
-        return await edit_delete(
-            event, f"There is no plugin with path {path} to uninstall it"
-        )
+        path = Path(f"userbot/ext_plugins/{shortname}.py")
+        if not os.path.exists(path):
+            return await edit_delete(
+                event, f"There is no plugin with path {path} to uninstall it"
+            )
     os.remove(path)
     if shortname in CMD_LIST:
         CMD_LIST.pop(shortname)
