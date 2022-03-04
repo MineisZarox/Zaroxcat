@@ -79,11 +79,15 @@ async def refesh(event):
         print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
         await load_plugins("ext_plugins")
         print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+        plug = 0
+        dir = os.listdir("userbot/plugins")
+        for file in dir:
+        plug+=1
         try:
             Heroku = heroku3.from_key(HEROKU_API_KEY)
             app = Heroku.app(HEROKU_APP_NAME)
             data = app.get_log()
-            await edit_or_reply(event, data, deflink=True, linktext="`Refreshed all external plugins successfully: `")
+            await edit_or_reply(event, data, deflink=True, linktext=f"`Refreshed all {plug} external plugins successfully:`")
         except BaseException:
             return await edit_or_reply(event, "`Refreshed all external plugins successfully`")
     except Exception as e:
