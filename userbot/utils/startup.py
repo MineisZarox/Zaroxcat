@@ -22,7 +22,7 @@ from .tools import create_supergroup
 
 LOGS = logging.getLogger("CatUserbot")
 cmdhr = Config.COMMAND_HAND_LER
-EXTRA = gvarstatus("EXTRA_PIC") or "https://telegra.ph/file/e9f733ff2e303f29a3544.mp4"
+EXTRA = gvarstatus("EXTRA_PIC") or "https://telegra.ph/file/11a0427e232dd533f54ec.mp4"
 
 async def setup_bot():
     """
