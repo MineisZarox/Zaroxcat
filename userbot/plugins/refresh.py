@@ -80,7 +80,7 @@ async def refesh(event):
         await load_plugins("ext_plugins")
         print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
         plug = 0
-        dir = os.listdir("userbot/plugins")
+        dir = os.listdir("userbot/ext_plugins")
         for file in dir:
             plug+=1
         try:
