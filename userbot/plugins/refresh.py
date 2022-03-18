@@ -3,7 +3,7 @@ import os
 import heroku3
 import shutil as sl
 from ..Config import Config
-from ..utils import load_plugins, remove_plugin as rem
+from ..utils import load_module, load_plugins, remove_plugin as rem
 from . import catub, edit_delete, edit_or_reply, UPSTREAM_REPO_URL
 
 plugin_category = "tools"
@@ -30,7 +30,7 @@ else:
 # =================================================
     
 @catub.cat_cmd(
-    pattern="refresh( -def|$)?",
+    pattern="refresh ([\s\S]*)?",
     command=("refresh", plugin_category),
     info={
         "header": "To refresh all external plugin.",
@@ -65,30 +65,50 @@ async def refesh(event):
                 return await edit_or_reply(event, "`Refreshed all default plugins successfully`")
         except Exception as e:
             LOGS.error(f"{e}")"""
-    try:
-        k = os.listdir("userbot/ext_plugins")
-        res = [sub.replace('.py', '') for sub in k]
-        for i in res:
-            rem(i)
-        await edit_or_reply(event, f"`Cloning to {d}...`")
-        sl.rmtree("userbot/ext_plugins")
-        os.system(f"git clone {plug_repo}")
-        os.system("mv 'Plugins/ext_plugins' 'userbot'")
-        sl.rmtree("Plugins")
-        await edit_or_reply(event, f"`Installing external plugins...`")
-        print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-        await load_plugins("ext_plugins")
-        print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-        plug = 0
-        dir = os.listdir("userbot/ext_plugins")
-        for file in dir:
-            plug+=1
+    plugin = event.pattern_match.group(1)
+    if plugin:
         try:
-            Heroku = heroku3.from_key(HEROKU_API_KEY)
-            app = Heroku.app(HEROKU_APP_NAME)
-            data = app.get_log()
-            await edit_or_reply(event, data, deflink=True, linktext=f"`Refreshed all {plug} external plugins successfully:`")
-        except BaseException:
-            return await edit_or_reply(event, "`Refreshed all external plugins successfully`")
-    except Exception as e:
-        LOGS.error(f"{e}")
+            try:
+                rem(plugin)
+            except:
+                return await edit_or_reply(event, f"`No such plugin exist as {plugin}.py`")
+            sl.rmtree(f"userbot/ext_plugins/{plugin}.py")
+            os.system(f"git clone {plug_repo}")
+            os.system(f"mv 'Plugins/ext_plugins/{plugin}.py' 'userbot/ext_plugins'")
+            sl.rmtree("Plugins")
+            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+            await load_module(plugin, "userbot/ext_plugins")
+            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+            await edit_or_reply(event,  f"`Refreshed {plugin} successfully.`")
+        except Exception as e:
+            LOGS.error(f"{e}")
+            return await edit_or_reply(event,  f"`Error: {e}`")
+    else:
+        try:
+            k = os.listdir("userbot/ext_plugins")
+            res = [sub.replace('.py', '') for sub in k]
+            for i in res:
+                rem(i)
+            await edit_or_reply(event, f"`Cloning to {d}...`")
+            sl.rmtree("userbot/ext_plugins")
+            os.system(f"git clone {plug_repo}")
+            os.system("mv 'Plugins/ext_plugins' 'userbot'")
+            sl.rmtree("Plugins")
+            await edit_or_reply(event, f"`Installing external plugins...`")
+            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+            await load_plugins("ext_plugins")
+            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
+            plug = 0
+            dir = os.listdir("userbot/ext_plugins")
+            for file in dir:
+                plug+=1
+            try:
+                Heroku = heroku3.from_key(HEROKU_API_KEY)
+                app = Heroku.app(HEROKU_APP_NAME)
+                data = app.get_log()
+                await edit_or_reply(event, data, deflink=True, linktext=f"`Refreshed all {plug} external plugins successfully:`")
+            except BaseException:
+                return await edit_or_reply(event, "`Refreshed all external plugins successfully`")
+        except Exception as e:
+            LOGS.error(f"{e}")
+            return await edit_or_reply(event,  f"`Error: {e}`")
