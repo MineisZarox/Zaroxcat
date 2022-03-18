@@ -42,7 +42,7 @@ else:
 async def refesh(event):
     "To refresh ext_plugins"
     plugin = event.pattern_match.group(1)
-    if plugin != None:
+    if plugin:
         try:
             try:
                 rem(plugin)
@@ -58,7 +58,7 @@ async def refesh(event):
             await edit_or_reply(event,  f"`Refreshed {plugin} successfully.`")
         except Exception as e:
             LOGS.error(f"{e}")
-            return await edit_or_reply(event,  f"`Error: {e}`")
+            return await edit_or_reply(event,  f"`Error:: {e}`")
     else:
         try:
             k = os.listdir("userbot/ext_plugins")
