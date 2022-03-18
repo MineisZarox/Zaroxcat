@@ -72,7 +72,7 @@ async def refesh(event):
                 rem(plugin)
             except:
                 return await edit_or_reply(event, f"`No such plugin exist as {plugin}.py`")
-            sl.rmtree(f"userbot/ext_plugins/{plugin}.py")
+            os.remove(f"userbot/ext_plugins/{plugin}.py")
             os.system(f"git clone {plug_repo}")
             os.system(f"mv 'Plugins/ext_plugins/{plugin}.py' 'userbot/ext_plugins'")
             sl.rmtree("Plugins")
