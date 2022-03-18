@@ -53,7 +53,7 @@ async def refesh(event):
             os.system(f"mv 'Plugins/ext_plugins/{plugin}.py' 'userbot/ext_plugins'")
             sl.rmtree("Plugins")
             print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-            await load_module(plugin, "userbot/ext_plugins")
+            load_module(plugin, "userbot/ext_plugins")
             print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
             await edit_or_reply(event,  f"`Refreshed {plugin} successfully.`")
         except Exception as e:
