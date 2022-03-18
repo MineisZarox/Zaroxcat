@@ -89,6 +89,12 @@ async def send(event):
     thumb = thumb_image_path if os.path.exists(thumb_image_path) else None
     input_str = event.pattern_match.group(1)
     the_plugin_file = f"./userbot/plugins/{input_str}.py"
+    if not os.path.exists(the_plugin_file):
+        the_plugin_file = f"./userbot/ext_plugins/{shortname}.py"
+        if not os.path.exists(the_plugin_file):
+            return await edit_delete(
+                event, f"404: File Not Found"
+            )
     repo_link = os.environ.get("UPSTREAM_REPO")
     if repo_link == "goodcat":
         repo_link = "https://github.com/sandy1709/catuserbot"
