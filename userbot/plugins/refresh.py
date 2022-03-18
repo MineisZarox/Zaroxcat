@@ -30,41 +30,17 @@ else:
 # =================================================
     
 @catub.cat_cmd(
-    pattern="refresh ([\s\S]*)?",
+    pattern="refresh(?:\s|$)([\s\S]*)",
     command=("refresh", plugin_category),
     info={
-        "header": "To refresh all external plugin.",
-        "description": "Reinstall all external plugins from external plugin repository.",
+        "header": "To refresh external plugin with repository.",
+        "description": "Reinstall external plugins from external plugin repository.",
         "usage": "{tr}refresh",
     },
 )
 
 async def refesh(event):
-    """if_def = event.pattern_match.group(1)
-    if if_def == " -def":
-        try:
-            k = os.listdir("userbot/plugins")
-            res = [sub.replace('.py', '') for sub in k]
-            for i in res:
-                rem(i)
-            await edit_or_reply(event, f"`Cloning to {v}...`")
-            sl.rmtree("userbot/plugins")
-            os.system(f"git clone --single-branch --branch {branch} {UPSTREAM_REPO_URL}")
-            os.system("mv 'Zaroxcat/userbot/plugins' 'userbot'")
-            sl.rmtree("Zaroxcat")
-            await edit_or_reply(event, f"`Installing default plugins...`")
-            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-            await load_plugins("plugins")
-            print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
-            try:
-                Heroku = heroku3.from_key(HEROKU_API_KEY)
-                app = Heroku.app(HEROKU_APP_NAME)
-                data = app.get_log()
-                await edit_or_reply(event, data, deflink=True, linktext="`Refreshed all default plugins successfully: `")
-            except BaseException:
-                return await edit_or_reply(event, "`Refreshed all default plugins successfully`")
-        except Exception as e:
-            LOGS.error(f"{e}")"""
+    "To refresh ext_plugins"
     plugin = event.pattern_match.group(1)
     if plugin != None:
         try:
