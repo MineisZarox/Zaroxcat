@@ -90,7 +90,7 @@ async def send(event):
     input_str = event.pattern_match.group(1)
     the_plugin_file = f"./userbot/plugins/{input_str}.py"
     if not os.path.exists(the_plugin_file):
-        the_plugin_file = f"./userbot/ext_plugins/{shortname}.py"
+        the_plugin_file = f"./userbot/ext_plugins/{input_str}.py"
         if not os.path.exists(the_plugin_file):
             return await edit_delete(
                 event, f"404: File Not Found"
@@ -158,9 +158,9 @@ async def unload(event):
 async def unload(event):
     "To uninstall a plugin."
     shortname = event.pattern_match.group(2)
-    path = Path(f"userbot/plugins/{shortname}.py")
+    path = Path(f"userbot/ext_plugins/{shortname}.py")
     if not os.path.exists(path):
-        path = Path(f"userbot/ext_plugins/{shortname}.py")
+        path = Path(f"userbot/plugins/{shortname}.py")
         if not os.path.exists(path):
             return await edit_delete(
                 event, f"There is no plugin with path {path} to uninstall it"
