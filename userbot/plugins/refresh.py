@@ -66,7 +66,7 @@ async def refesh(event):
         except Exception as e:
             LOGS.error(f"{e}")"""
     plugin = event.pattern_match.group(1)
-    if plugin:
+    if plugin != None:
         try:
             try:
                 rem(plugin)
