@@ -319,7 +319,7 @@ async def lsinline(event):
         try:
             ls, path_ = (event.text).split(" ", 1)
             path = Path(path_) if path_ else os.getcwd()
-        except:
+        except Exception:
             ls = event.text
             path = os.getcwd()
         if "ls" in ls:
