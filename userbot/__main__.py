@@ -52,14 +52,6 @@ async def startup_process():
 
 
 async def externalrepo():
-    if Config.EXTERNAL_REPO:
-        await install_externalrepo(
-            Config.EXTERNAL_REPO, Config.EXTERNAL_REPOBRANCH, "xtraplugins"
-        )
-    if Config.BADCAT:
-        await install_externalrepo(
-            Config.BADCAT_REPO, Config.BADCAT_REPOBRANCH, "badcatext"
-        )
     if Config.VCMODE:
         await install_externalrepo(
             "https://github.com/TgCatUB/CatVCPlayer", "test", "catvc"
