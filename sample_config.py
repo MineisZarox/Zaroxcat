@@ -13,7 +13,7 @@ class Config(object):
     LOGGER = True
     # MUST NEEDED VARS
     # set this value with your name
-    ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
+    ALIVE_NAME = os.environ.get("ALIVE_NAME", "Taki")
     # Get the values for following 2 from my.telegram.org
     APP_ID = int(os.environ.get("APP_ID", 6))
     API_HASH = os.environ.get("API_HASH") or None
@@ -30,13 +30,13 @@ class Config(object):
     TZ = os.environ.get("TZ", "Asia/Kolkata")
     # set this with required cat repo link
     UPSTREAM_REPO = os.environ.get(
-        "UPSTREAM_REPO", "https://github.com/TgCatUB/catuserbot"
+        "UPSTREAM_REPO", "https://github.com/MineisZarox/Zaroxcat"
     )
     # External plugins repo
     EXTERNAL_REPO = os.environ.get("EXTERNAL_REPO", None)
     if bool(EXTERNAL_REPO and (EXTERNAL_REPO.lower() != "false")):
         if not url(EXTERNAL_REPO):
-            EXTERNAL_REPO = "https://github.com/TgCatUB/CatPlugins"
+            EXTERNAL_REPO = None
     else:
         EXTERNAL_REPO = None
     # if you need badcat plugins use the following vars
@@ -76,7 +76,7 @@ class Config(object):
     TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "catuserbot")
     # for custom thumb image set this with your required thumb telegraoh link
     THUMB_IMAGE = os.environ.get(
-        "THUMB_IMAGE", "https://telegra.ph/file/ca95524e4734b0d5461b5.jpg"
+        "THUMB_IMAGE", "https://telegra.ph/file/ed856efeb5dc932360cfa.jpg"
     )
     # specify NO_LOAD with plugin names for not loading in userbot
     NO_LOAD = list(os.environ.get("NO_LOAD", "").split())
