@@ -32,8 +32,8 @@ except Exception as e:
     LOGS.error(f"{e}")
     sys.exit()
     
-repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
-token = os.environ.get("GITHUB_ACCESS_TOKEN")
+repo = Config.EXTERNAL_PLUGIN_REPO
+token = Config.GITHUB_ACCESS_TOKEN
 a, b, c, username, d, = repo.split("/")
 ppr = c + "/" + username + "/"  + d
 if token:
