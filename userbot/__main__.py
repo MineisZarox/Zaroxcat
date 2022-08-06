@@ -22,7 +22,7 @@ print("Licensed under the terms of the " + userbot.__license__)
 
 cmdhr = Config.COMMAND_HAND_LER
 
-repo = Config.EXTERNAL_PLUGIN_REPO or "https://github.com/MineisZarox/Plugins
+repo = Config.EXTERNAL_REPO or "https://github.com/MineisZarox/Plugins
 token = Config.GITHUB_ACCESS_TOKEN
 a, b, c, username, d, = repo.split("/")
 ppr = c + "/" + username + "/"  + d
