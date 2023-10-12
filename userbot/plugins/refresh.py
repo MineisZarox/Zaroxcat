@@ -10,14 +10,12 @@ plugin_category = "tools"
 
 
 # =================================================
-repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
-token = os.environ.get("GITHUB_ACCESS_TOKEN")
-a, b, c, username, d, = repo.split("/")
-ppr = c + "/" + username + "/"  + d
-if token:
-    plug_repo = f"https://{username}:{token}@{ppr}.git"
-else:
-    plug_repo = repo
+def get_repo():
+    repo = os.environ.get("EXTERNAL_PLUGIN_REPO")
+    token = os.environ.get("GITHUB_ACCESS_TOKEN")
+    a, b, c, username, d, = repo.split("/")
+    ppr = f"{c}/{username}/{d}"
+    return f"https://{username}:{token}@{ppr}.git" if token else repo
 # =================================================
     
 @catub.cat_cmd(
@@ -36,6 +34,7 @@ async def refesh(event):
     "To refresh ext_plugins"
     if not os.environ.get("EXTERNAL_PLUGIN_REPO"):
         return await edit_or_reply(event,  "Please set Enviroment variable `EXTERNAL_PLUGIN_REPO`\n\n__Note: This ENV VAR is only used by this perticular plugin.__")
+    repo = get_repo()
     if plugin := event.pattern_match.group(1):
         try:
             try:
